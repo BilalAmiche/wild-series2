@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CategoryRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -23,10 +25,14 @@ class Category
     private $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Program::class, inversedBy="category")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\OneToMany(targetEntity=Program::class, mappedBy="category")
      */
-    private $program;
+    private $programs;
+
+    public function __construct()
+    {
+        $this->programs = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -45,16 +51,33 @@ class Category
         return $this;
     }
 
-    public function getProgram(): ?Program
+    /**
+     * @return Collection|Program[]
+     */
+    public function getPrograms(): Collection
     {
-        return $this->program;
+        return $this->programs;
     }
 
-    public function setProgram(?Program $program): self
+    public function addProgram(Program $program): self
     {
-        $this->program = $program;
+        if (!$this->programs->contains($program)) {
+            $this->programs[] = $program;
+            $program->setCategory($this);
+        }
 
         return $this;
     }
 
+    public function removeProgram(Program $program): self
+    {
+        if ($this->programs->removeElement($program)) {
+            // set the owning side to null (unless already changed)
+            if ($program->getCategory() === $this) {
+                $program->setCategory(null);
+            }
+        }
+
+        return $this;
+    }
 }

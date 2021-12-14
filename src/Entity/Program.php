@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ProgramRepository;
+use App\Entity\Category;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -35,7 +36,8 @@ class Program
     private $poster;
 
     /**
-     * @ORM\OneToMany(targetEntity=category::class, mappedBy="program", orphanRemoval=true)
+     * @ORM\ManyToOne(targetEntity=category::class, inversedBy="programs")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $category;
 
@@ -85,32 +87,14 @@ class Program
         return $this;
     }
 
-    /**
-     * @return Collection|category[]
-     */
-    public function getCategory(): Collection
+    public function getCategory(): ?category
     {
         return $this->category;
     }
 
-    public function addCategory(category $category): self
+    public function setCategory(?category $category): self
     {
-        if (!$this->category->contains($category)) {
-            $this->category[] = $category;
-            $category->setProgram($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCategory(category $category): self
-    {
-        if ($this->category->removeElement($category)) {
-            // set the owning side to null (unless already changed)
-            if ($category->getProgram() === $this) {
-                $category->setProgram(null);
-            }
-        }
+        $this->category = $category;
 
         return $this;
     }
