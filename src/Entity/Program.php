@@ -39,7 +39,7 @@ class Program
      * @ORM\ManyToOne(targetEntity=category::class, inversedBy="programs")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $category;
+    private ?Category $category;
 
     /**
      * @ORM\OneToMany(targetEntity=Season::class, mappedBy="program")
@@ -48,7 +48,6 @@ class Program
 
     public function __construct()
     {
-        $this->category = new ArrayCollection();
         $this->seasons = new ArrayCollection();
     }
 
@@ -93,12 +92,12 @@ class Program
         return $this;
     }
 
-    public function getCategory(): ?category
+    public function getCategory(): ?Category
     {
         return $this->category;
     }
 
-    public function setCategory(?category $category): self
+    public function setCategory(?Category $category): self
     {
         $this->category = $category;
 
