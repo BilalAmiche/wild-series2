@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "19541deb99e422464178c6316d07bc93",
+    "content-hash": "4a9f4d4c4366c185c0db117e9751f133",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -2877,12 +2877,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/doctrine-bridge.git",
-                "reference": "45b3e642df751197f4f355451d51f2aeace188f3"
+                "reference": "567e3e25f17e5bd12bcc4637504ef87ec9ac852b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/doctrine-bridge/zipball/45b3e642df751197f4f355451d51f2aeace188f3",
-                "reference": "45b3e642df751197f4f355451d51f2aeace188f3",
+                "url": "https://api.github.com/repos/symfony/doctrine-bridge/zipball/567e3e25f17e5bd12bcc4637504ef87ec9ac852b",
+                "reference": "567e3e25f17e5bd12bcc4637504ef87ec9ac852b",
                 "shasum": ""
             },
             "require": {
@@ -2985,7 +2985,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-12-09T12:46:12+00:00"
+            "time": "2021-12-16T22:15:42+00:00"
         },
         {
             "name": "symfony/dotenv",

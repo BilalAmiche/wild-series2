@@ -7,10 +7,15 @@ use App\Entity\Category;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Entity(repositoryClass=ProgramRepository::class)
- */
+
+    /**
+    * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
+    * @UniqueEntity("title")
+    * @Assert\EnableAutoMapping()
+    */
 class Program
 {
     /**
@@ -21,12 +26,20 @@ class Program
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
+    * @ORM\Column(type="string", length=255)
+    * @Assert\NotBlank(message="ne me laisse pas tout vide")
+    * @Assert\Length(max="255", maxMessage="La titre saisie {{ value }} est trop long, il ne devrait pas dépasser {{ limit }} caractères")
+    */
     private $title;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank(message="ne me laisse pas tout vide")
+     * @Assert\Regex(
+     * pattern="plus belle la vie",
+     * match=false,
+     * message="On parle de vraies séries ici"
+     * )
      */
     private $summary;
 
