@@ -63,11 +63,9 @@ class ProgramController extends AbstractController
     * @Route("/{id}", requirements={"page"="\d+"}, methods={"GET"}, name="show")
     * @return Response
     */
-    public function show(Program $program, SeasonRepository $seasonRepository): Response
+    public function show(Program $program): Response
     {
-        $seasons = $seasonRepository->findAll();
-
-        return $this->render('program/show.html.twig', ['program' => $program, 'seasons' => $seasons]);
+        return $this->render('program/show.html.twig', ['program' => $program]);
     }
 
      /**
